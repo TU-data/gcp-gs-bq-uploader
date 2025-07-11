@@ -49,7 +49,7 @@ def load_sheet_to_bigquery(config_name: str):
 
     # 3. Pandas 데이터프레임 생성 및 컬럼명 변경 
     # 첫 행은 헤더, 나머지는 데이터
-    df = pd.DataFrame(data[1:], columns=data[0])
+    df = pd.DataFrame(data[1:], columns=data[0])    
     
     # 스키마 파일 기반으로 컬럼명 매핑 (한글 -> 영문)
     column_mapping = dict(zip(schema_df['기존 컬럼명'], schema_df['영어 컬럼명']))
