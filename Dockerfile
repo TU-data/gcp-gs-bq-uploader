@@ -16,4 +16,4 @@ COPY . .
 
 # gunicorn 웹 서버로 애플리케이션 실행
 # PORT 환경변수는 Cloud Run에서 자동으로 주입
-CMD ["gunicorn", "--bind", "0.0.0.0:$PORT", "--workers", "1", "--threads", "8", "--timeout", "0", "main:app"]
+CMD gunicorn --bind 0.0.0.0:$PORT --workers 1 --threads 8 --timeout 0 main:app
