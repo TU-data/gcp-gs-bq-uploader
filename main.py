@@ -49,7 +49,29 @@ def load_sheet_to_bigquery(config_name: str):
 
     # 3. Pandas 데이터프레임 생성 및 컬럼명 변경 
     # 첫 행은 헤더, 나머지는 데이터
-    df = pd.DataFrame(data[1:], columns=data[0])    
+    df = pd.DataFrame(data[1:], columns=data[0])
+
+    # -- 디버깅 로그 추가 시작 --
+    print(f"Google Sheet에서 읽어온 컬럼: {list(df.columns)}")
+    print(f"스키마 파일에 정의된 컬럼: {list(schema_df['기존 컬럼명'])}")
+
+    sheet_columns = set(df.columns)
+    schema_columns = set(schema_df['기존 컬럼명'])
+    
+    missing_in_sheet = schema_columns - sheet_columns
+    missing_in_schema = sheet_columns - schema_columns
+    
+    if missing_in_sheet or missing_in_schema:
+        error_message = "컬럼명 불일치 오류!\n"
+        if missing_in_sheet:
+            error_message += f"> Google Sheet에 다음 컬럼이 없습니다: {list(missing_in_sheet)}\n"
+        if missing_in_schema:
+            error_message += f"> 스키마 파일(schemas/{config['schema_file']})에 다음 컬럼이 없습니다: {list(missing_in_schema)}\n"
+        print(error_message)
+        raise ValueError(error_message)
+    
+    print("컬럼명 검증 완료: Google Sheet와 스키마 파일의 컬럼명이 일치합니다.")
+    # -- 디버깅 로그 추가 끝 --
     
     # 스키마 파일 기반으로 컬럼명 매핑 (한글 -> 영문)
     column_mapping = dict(zip(schema_df['기존 컬럼명'], schema_df['영어 컬럼명']))
