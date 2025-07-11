@@ -42,7 +42,7 @@ def load_sheet_to_bigquery(config_name: str):
     
     print(f"Reading data from sheet '{config['sheet_name']}' in range '{config['column_range']}'")
     data = worksheet.get(config['column_range'])
-    
+     
     if len(data) < 2:
         print("시트에 데이터가 없거나 헤더만 존재합니다. 작업을 종료합니다.")
         return
