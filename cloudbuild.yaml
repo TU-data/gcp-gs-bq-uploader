@@ -1,0 +1,26 @@
+steps:
+# 1. Docker 이미지 빌드
+- name: 'gcr.io/cloud-builders/docker'
+  args: [
+    'build', 
+    '-t', 'gcr.io/$PROJECT_ID/sheets-to-bq-pipeline:$COMMIT_SHA', 
+    '.'
+  ]
+
+# 2. 빌드한 이미지를 Container Registry에 푸시
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'gcr.io/$PROJECT_ID/sheets-to-bq-pipeline:$COMMIT_SHA']
+
+# 3. 빌드한 이미지로 Cloud Run 서비스에 배포
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: gcloud
+  args: [
+    'run', 'deploy', 'sheets-to-bq-pipeline', # Cloud Run 서비스 이름
+    '--image', 'gcr.io/$PROJECT_ID/sheets-to-bq-pipeline:$COMMIT_SHA',
+    '--region', 'asia-northeast3', # 서울 리전
+    '--service-account', 'sheets-to-bq-runner@$PROJECT_ID.iam.gserviceaccount.com', # Step 2에서 만든 서비스 계정
+    '--allow-unauthenticated' # Cloud Scheduler에서 호출할 수 있도록 임시 허용 (나중에 더 안전하게 변경 가능)
+  ]
+
+images:
+- 'gcr.io/$PROJECT_ID/sheets-to-bq-pipeline:$COMMIT_SHA'
