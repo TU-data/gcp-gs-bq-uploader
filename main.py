@@ -21,7 +21,7 @@ def get_google_credentials():
     return credentials
 
 def load_sheet_to_bigquery(config_name: str):
-    """지정된 설정을 기반으로 Google Sheet 데이터를 BigQuery에 로드합니다."""
+    """지정된 설정을 기반으로 Google Sheet 데이터를 BigQuery에 로드합니다.""" 
     
     # 1. 설정 및 스키마 파일 로드
     try:
