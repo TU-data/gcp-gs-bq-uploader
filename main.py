@@ -83,7 +83,31 @@ def load_sheet_to_bigquery(config_name: str):
     
     print(f"Dataframe created with {len(df)} rows and columns: {df.columns.tolist()}")
 
-    # 4. BigQuery에 데이터 로드
+    # 4. 스키마에 따라 데이터 타입 변환 (안정성 강화)
+    print("스키마에 따라 데이터 타입을 변환합니다...")
+    for index, row in schema_df.iterrows():
+        col_name = row['영어 컬럼명']
+        col_type = row['데이터 타입'].upper()
+        
+        if col_name in df.columns:
+            try:
+                if col_type == 'STRING':
+                    df[col_name] = df[col_name].astype(str).fillna('')
+                elif col_type in ['INTEGER', 'INT64']:
+                    # 숫자로 변환할 수 없는 값은 0으로 대체
+                    df[col_name] = pd.to_numeric(df[col_name], errors='coerce').fillna(0).astype(int)
+                elif col_type in ['FLOAT', 'FLOAT64']:
+                    df[col_name] = pd.to_numeric(df[col_name], errors='coerce').fillna(0.0).astype(float)
+                elif col_type == 'BOOLEAN':
+                    # 'true', 't', '1' (대소문자 무관) 외에는 모두 False로 처리
+                    df[col_name] = df[col_name].str.lower().isin(['true', 't', '1']).astype(bool)
+                # DATE, DATETIME, TIMESTAMP 등 다른 타입 추가 가능
+            except Exception as e:
+                print(f"경고: 컬럼 '{col_name}'({col_type}) 변환 중 오류 발생. 데이터를 건너뜁니다. 오류: {e}")
+                # 오류 발생 시 해당 컬럼을 null 값으로 채울 수도 있음
+                df[col_name] = pd.NA
+
+    # 5. BigQuery에 데이터 로드
     # bigquery_table_id는 'project.dataset.table' 전체 문자열이어야 함
     table_id = config['bigquery_table_id']
     # project는 table_id에서 추출
