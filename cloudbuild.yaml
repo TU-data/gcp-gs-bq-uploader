@@ -26,4 +26,4 @@ images:
 - 'gcr.io/$PROJECT_ID/sheets-to-bq-pipeline:$COMMIT_SHA'
 
 options:
-  logging: CLOUD_LOGGING_ONLY
+  logging: CLOUD_LOGGING_ONLY 
