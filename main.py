@@ -47,7 +47,7 @@ def load_sheet_to_bigquery(config_name: str):
         print("시트에 데이터가 없거나 헤더만 존재합니다. 작업을 종료합니다.")
         return
 
-    # 3. Pandas 데이터프레임 생성 및 컬럼명 변경
+    # 3. Pandas 데이터프레임 생성 및 컬럼명 변경 
     # 첫 행은 헤더, 나머지는 데이터
     df = pd.DataFrame(data[1:], columns=data[0])
     
