@@ -136,8 +136,12 @@ def load_sheet_to_bigquery(config_key: str):
     # BQ 클라이언트를 사용하여 데이터프레임에서 직접 로드
     print(f"Attempting to load data to BigQuery table: {table_id}")
     print(f"BigQuery schema being used: {bq_schema}")
-    print(f"DataFrame head:\n{df.head().to_string()}")
-    print(f"DataFrame dtypes:\n{df.dtypes.to_string()}")
+    # 디버그 정보를 변수에 저장
+    df_head_str = df.head().to_string()
+    df_dtypes_str = df.dtypes.to_string()
+
+    print(f"DataFrame head:\n{df_head_str}", flush=True)
+    print(f"DataFrame dtypes:\n{df_dtypes_str}", flush=True)
 
     job = bigquery_client.load_table_from_dataframe(
         df, table_id, job_config=job_config
