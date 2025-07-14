@@ -24,7 +24,7 @@ Flask 기반의 웹 애플리케이션으로 구현되었으며, Docker를 사�
 ├── main.py               # 핵심 로직이 담긴 Flask 애플리케이션
 ├── requirements.txt      # Python 패키지 의존성 목록
 ├── configs/
-│   └── call_criteria.json  # 데이터 파이프라인 설정 예시 (JSON)
+│   └── main_configs.json  # 여러 파이프라인 설정을 포함하는 JSON 파일
 └── schemas/
     └── call_criteria.csv   # BigQuery 테이블 스키마 및 컬럼 매핑 예시 (CSV)
 ```
@@ -37,8 +37,8 @@ Flask 기반의 웹 애플리케이션으로 구현되었으며, Docker를 사�
 
 ## 4. 동작 방식
 
-1.  외부 서비스(예: Google Cloud Scheduler)가 Cloud Run 서비스의 `/process` 엔드포인트로 HTTP POST 요청을 보냅니다. 요청 본문(body)에는 실행할 설정 파일의 이름(`config_name`)이 포함되어야 합니다.
-2.  `main.py`의 Flask 애플리케이션이 요청을 받아 `config_name`에 해당하는 `configs/{config_name}.json` 파일을 읽습니다.
+1.  외부 서비스(예: Google Cloud Scheduler)가 Cloud Run 서비스의 `/process` 엔드포인트로 HTTP POST 요청을 보냅니다. 요청 본문(body)에는 실행할 설정의 키(`config_key`)가 포함되어야 합니다.
+2.  `main.py`의 Flask 애플리케이션이 요청을 받아 `config_key`에 해당하는 `configs/main_configs.json` 파일에서 설정을 읽습니다.
 3.  설정 파일에 명시된 Google Sheet ID와 시트 이름, 범위를 사용하여 `gspread` 라이브러리로 데이터를 조회합니다.
 4.  `schemas/{schema_file}.csv` 파일을 읽어 컬럼명 매핑 정보와 데이터 타입을 가져옵니다.
 5.  Pandas를 사용하여 조회한 데이터의 컬럼명을 변경하고, 정의된 데이터 타입으로 변환합니다.
@@ -84,9 +84,10 @@ Cloud Run에 서비스가 성공적으로 배포되면, 아래와 같이 HTTP PO
 curl -X POST {SERVICE_URL}/process \
 -H "Content-Type: application/json" \
 -d '{ \
-  "config_name": "call_criteria" \
+  "config_key": "01" \
 }'
 ```
 
--   `config_name`: `configs` 디렉토리에 있는 설정 파일의 이름 (확장자 `.json` 제외)을 지정합니다.
+-   `config_key`: `configs/main_configs.json` 파일에 정의된 설정의 키를 지정합니다. (예: "01")
+
 -   이 요청은 Cloud Scheduler에 등록하여 원하는 시간마다 주기적으로 실행하도록 설정할 수 있습니다.
