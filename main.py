@@ -20,18 +20,24 @@ def get_google_credentials():
     credentials, project = default(scopes=scopes)
     return credentials
 
-def load_sheet_to_bigquery(config_name: str):
-    """지정된 설정을 기반으로 Google Sheet 데이터를 BigQuery에 로드합니다.""" 
-    
-    # 1. 설정 및 스키마 파일 로드
+def load_sheet_to_bigquery(config_key: str):
+    """지정된 설정을 기반으로 Google Sheet 데이터를 BigQuery에 로드합니다."""
+
+    # 1. 설정 파일 로드 및 키 확인
     try:
-        with open(f'configs/{config_name}.json', 'r', encoding='utf-8') as f:
-            config = json.load(f)
-        # bigquery_table_id를 config 값 그대로 사용
+        with open('configs/main_configs.json', 'r', encoding='utf-8') as f:
+            all_configs = json.load(f)
+        
+        config = all_configs.get(config_key)
+        if not config:
+            raise ValueError(f"'{config_key}'에 해당하는 설정을 'main_configs.json'에서 찾을 수 없습니다.")
+
         schema_path = os.path.join('schemas', config['schema_file'])
         schema_df = pd.read_csv(schema_path)
     except FileNotFoundError as e:
-        raise ValueError(f"'{config_name}'에 대한 설정 또는 스키마 파일({e.filename})이 없습니다.")
+        raise ValueError(f"설정 또는 스키마 파일({e.filename})이 없습니다.")
+    except Exception as e:
+        raise e
 
     # 2. Google Sheets API 인증 및 데이터 읽기
     credentials = get_google_credentials()
@@ -124,7 +130,7 @@ def load_sheet_to_bigquery(config_name: str):
         schema=bq_schema,
         write_disposition="WRITE_TRUNCATE",  # 기존 테이블 데이터 삭제 후 새로 쓰기
         source_format=bigquery.SourceFormat.CSV,
-        skip_leading_rows=1, # 헤더 행 건너뛰기
+        skip_leading_rows=1 # 헤더 행 건너뛰기
     )
 
     # 데이터프레임을 CSV 문자열로 변환하여 로드 (더 안정적)
@@ -144,17 +150,17 @@ def process_sheet_request():
     """Cloud Scheduler로부터 POST 요청을 받아 데이터 처리를 시작하는 엔드포인트"""
     payload = request.get_json()
     
-    if not payload or 'config_name' not in payload:
-        return Response("Bad Request: 요청 본문에 'config_name'이 필요합니다.", status=400)
+    if not payload or 'config_key' not in payload:
+        return Response("Bad Request: 요청 본문에 'config_key'가 필요합니다.", status=400)
         
-    config_name = payload['config_name']
+    config_key = payload['config_key']
     
     try:
-        print(f"Job started for '{config_name}'...")
-        load_sheet_to_bigquery(config_name)
-        return Response(f"Success: Job for '{config_name}' completed.", status=200)
+        print(f"Job started for config_key '{config_key}'...")
+        load_sheet_to_bigquery(config_key)
+        return Response(f"Success: Job for config_key '{config_key}' completed.", status=200)
     except Exception as e:
-        print(f"Error processing '{config_name}': {e}")
+        print(f"Error processing config_key '{config_key}': {e}")
         # 로깅을 위해 에러를 더 자세히 출력
         import traceback
         traceback.print_exc()
