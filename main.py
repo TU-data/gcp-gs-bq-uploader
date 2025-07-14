@@ -134,6 +134,11 @@ def load_sheet_to_bigquery(config_key: str):
     )
 
     # BQ 클라이언트를 사용하여 데이터프레임에서 직접 로드
+    print(f"Attempting to load data to BigQuery table: {table_id}")
+    print(f"BigQuery schema being used: {bq_schema}")
+    print(f"DataFrame head:\n{df.head().to_string()}")
+    print(f"DataFrame dtypes:\n{df.dtypes.to_string()}")
+
     job = bigquery_client.load_table_from_dataframe(
         df, table_id, job_config=job_config
     )
@@ -157,11 +162,15 @@ def process_sheet_request():
         load_sheet_to_bigquery(config_key)
         return Response(f"Success: Job for config_key '{config_key}' completed.", status=200)
     except Exception as e:
-        print(f"Error processing config_key '{config_key}': {e}")
-        # 로깅을 위해 에러를 더 자세히 출력
         import traceback
-        traceback.print_exc()
-        return Response(f"Internal Server Error: {e}", status=500)
+        # 에러의 전체 트레이스백을 문자열로 캡처합니다.
+        error_details = traceback.format_exc()
+        
+        # Cloud Run 로그에 상세 에러를 출력합니다.
+        print(f"Error processing config_key '{config_key}':\n{error_details}")
+
+        # HTTP 응답 본문에 상세 에러를 포함하여 디버깅을 돕습니다.
+        return Response(f"Internal Server Error:\n{error_details}", status=500)
 
 if __name__ == "__main__":
     # Cloud Run 환경에서는 PORT 환경변수를 사용
