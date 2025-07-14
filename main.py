@@ -55,7 +55,9 @@ def load_sheet_to_bigquery(config_key: str):
 
     # 3. Pandas 데이터프레임 생성 및 컬럼명 변경 
     # 첫 행은 헤더, 나머지는 데이터
-    df = pd.DataFrame(data[1:], columns=data[0])
+    # Google Sheet의 컬럼명 앞뒤 공백 제거
+    header = [h.strip() for h in data[0]]
+    df = pd.DataFrame(data[1:], columns=header)
 
     # -- 디버깅 로그 추가 시작 --
     print(f"Google Sheet에서 읽어온 컬럼: {list(df.columns)}")
