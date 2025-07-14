@@ -42,7 +42,7 @@ Flask 기반의 웹 애플리케이션으로 구현되었으며, Docker를 사�
 3.  설정 파일에 명시된 Google Sheet ID와 시트 이름, 범위를 사용하여 `gspread` 라이브러리로 데이터를 조회합니다.
 4.  `schemas/{schema_file}.csv` 파일을 읽어 컬럼명 매핑 정보와 데이터 타입을 가져옵니다.
 5.  Pandas를 사용하여 조회한 데이터의 컬럼명을 변경하고, 정의된 데이터 타입으로 변환합니다.
-6.  Google BigQuery 클라이언트를 사용하여 최종 데이터를 목표 테이블에 덮어쓰기 방식(`WRITE_TRUNCATE`)으로 적재합니다.
+6.  Google BigQuery 클라이언트를 사용하여 변환된 Pandas DataFrame을 목표 테이블에 직접 적재합니다. 이때 `WRITE_TRUNCATE` 옵션을 사용하여 기존 데이터를 모두 삭제하고 새로 입력합니다.
 
 ## 5. 설치 및 배포
 

@@ -128,14 +128,9 @@ def load_sheet_to_bigquery(config_key: str):
     
     job_config = bigquery.LoadJobConfig(
         schema=bq_schema,
-        write_disposition="WRITE_TRUNCATE",  # 기존 테이블 데이터 삭제 후 새로 쓰기
-        source_format=bigquery.SourceFormat.CSV,
-        skip_leading_rows=1 # 헤더 행 건너뛰기
+        write_disposition="WRITE_TRUNCATE"  # 기존 테이블 데이터 삭제 후 새로 쓰기
     )
 
-    # 데이터프레임을 CSV 문자열로 변환하여 로드 (더 안정적)
-    csv_data = df.to_csv(index=False)
-    
     # BQ 클라이언트를 사용하여 데이터프레임에서 직접 로드
     job = bigquery_client.load_table_from_dataframe(
         df, table_id, job_config=job_config
