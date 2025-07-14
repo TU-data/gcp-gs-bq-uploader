@@ -46,12 +46,14 @@ def load_sheet_to_bigquery(config_key: str):
     spreadsheet = gc.open_by_key(config['google_sheet_id'])
     worksheet = spreadsheet.worksheet(config['sheet_name'])
     
-    print(f"Reading data from sheet '{config['sheet_name']}' in range '{config['column_range']}'")
+    print(f"[{config_key}] Google Sheet '{config['sheet_name']}'에서 데이터 읽기 시작 (범위: '{config['column_range']}')...", flush=True)
     data = worksheet.get(config['column_range'])
      
     if len(data) < 2:
-        print("시트에 데이터가 없거나 헤더만 존재합니다. 작업을 종료합니다.")
+        print(f"[{config_key}] 시트에 데이터가 없거나 헤더만 존재합니다. 작업을 종료합니다.", flush=True)
         return
+
+    print(f"[{config_key}] Google Sheet에서 {len(data) - 1}개의 행 데이터 읽기 완료.", flush=True)
 
     # 3. Pandas 데이터프레임 생성 및 컬럼명 변경 
     # 첫 행은 헤더, 나머지는 데이터
@@ -59,9 +61,11 @@ def load_sheet_to_bigquery(config_key: str):
     header = [h.strip() for h in data[0]]
     df = pd.DataFrame(data[1:], columns=header)
 
+    print(f"[{config_key}] 데이터프레임 생성 완료. 총 {len(df)} 행.", flush=True)
+
     # -- 디버깅 로그 추가 시작 --
-    print(f"Google Sheet에서 읽어온 컬럼: {list(df.columns)}")
-    print(f"스키마 파일에 정의된 컬럼: {list(schema_df['기존 컬럼명'])}")
+    print(f"[{config_key}] Google Sheet에서 읽어온 컬럼: {list(df.columns)}", flush=True)
+    print(f"[{config_key}] 스키마 파일에 정의된 컬럼: {list(schema_df['기존 컬럼명'])}", flush=True)
 
     sheet_columns = set(df.columns)
     schema_columns = set(schema_df['기존 컬럼명'])
@@ -75,10 +79,10 @@ def load_sheet_to_bigquery(config_key: str):
             error_message += f"> Google Sheet에 다음 컬럼이 없습니다: {list(missing_in_sheet)}\n"
         if missing_in_schema:
             error_message += f"> 스키마 파일(schemas/{config['schema_file']})에 다음 컬럼이 없습니다: {list(missing_in_schema)}\n"
-        print(error_message)
+        print(f"[{config_key}] {error_message}", flush=True)
         raise ValueError(error_message)
     
-    print("컬럼명 검증 완료: Google Sheet와 스키마 파일의 컬럼명이 일치합니다.")
+    print(f"[{config_key}] 컬럼명 검증 완료: Google Sheet와 스키마 파일의 컬럼명이 일치합니다.", flush=True)
     # -- 디버깅 로그 추가 끝 --
     
     # 스키마 파일 기반으로 컬럼명 매핑 (한글 -> 영문)
@@ -89,10 +93,10 @@ def load_sheet_to_bigquery(config_key: str):
     final_columns = [col for col in column_mapping.values() if col in df.columns]
     df = df[final_columns]
     
-    print(f"Dataframe created with {len(df)} rows and columns: {df.columns.tolist()}")
+    print(f"[{config_key}] 컬럼명 매핑 및 순서 고정 완료. 최종 컬럼: {df.columns.tolist()}", flush=True)
 
     # 4. 스키마에 따라 데이터 타입 변환 (안정성 강화)
-    print("스키마에 따라 데이터 타입을 변환합니다...")
+    print(f"[{config_key}] 스키마에 따라 데이터 타입을 변환합니다...", flush=True)
     for index, row in schema_df.iterrows():
         col_name = row['영어 컬럼명']
         col_type = row['데이터 타입'].upper()
@@ -111,9 +115,11 @@ def load_sheet_to_bigquery(config_key: str):
                     df[col_name] = df[col_name].str.lower().isin(['true', 't', '1']).astype(bool)
                 # DATE, DATETIME, TIMESTAMP 등 다른 타입 추가 가능
             except Exception as e:
-                print(f"경고: 컬럼 '{col_name}'({col_type}) 변환 중 오류 발생. 데이터를 건너뜁니다. 오류: {e}")
+                print(f"[{config_key}] 경고: 컬럼 '{col_name}'({col_type}) 변환 중 오류 발생. 데이터를 건너뜁니다. 오류: {e}", flush=True)
                 # 오류 발생 시 해당 컬럼을 null 값으로 채울 수도 있음
                 df[col_name] = pd.NA
+
+    print(f"[{config_key}] 데이터 타입 변환 완료.", flush=True)
 
     # 5. BigQuery에 데이터 로드
     # bigquery_table_id는 'project.dataset.table' 전체 문자열이어야 함
@@ -134,21 +140,16 @@ def load_sheet_to_bigquery(config_key: str):
     )
 
     # BQ 클라이언트를 사용하여 데이터프레임에서 직접 로드
-    print(f"Attempting to load data to BigQuery table: {table_id}")
-    print(f"BigQuery schema being used: {bq_schema}")
-    # 디버그 정보를 변수에 저장
-    df_head_str = df.head().to_string()
-    df_dtypes_str = df.dtypes.to_string()
-
-    print(f"DataFrame head:\n{df_head_str}", flush=True)
-    print(f"DataFrame dtypes:\n{df_dtypes_str}", flush=True)
+    print(f"[{config_key}] BigQuery 테이블 '{table_id}'에 데이터 로드 시작 (스키마: {bq_schema})...", flush=True)
+    print(f"[{config_key}] 데이터프레임 미리보기 (상위 5행):\n{df.head().to_string()}", flush=True)
+    print(f"[{config_key}] 데이터프레임 컬럼 타입:\n{df.dtypes.to_string()}", flush=True)
 
     job = bigquery_client.load_table_from_dataframe(
         df, table_id, job_config=job_config
     )
     job.result()  # 작업이 완료될 때까지 대기
 
-    print(f"성공: {job.output_rows}개의 행을 BigQuery 테이블 {table_id}에 로드했습니다.")
+    print(f"[{config_key}] 성공: {job.output_rows}개의 행을 BigQuery 테이블 {table_id}에 로드했습니다.", flush=True)
 
 
 @app.route('/process', methods=['POST'])
@@ -162,8 +163,8 @@ def process_sheet_request():
     config_key = payload['config_key']
     
     try:
-        print(f"Job started for config_key '{config_key}'...")
-        load_sheet_to_bigquery(config_key)
+        print(f"[{config_key}] 작업 시작...", flush=True)
+        print(f"[{config_key}] 작업 성공적으로 완료.", flush=True)
         return Response(f"Success: Job for config_key '{config_key}' completed.", status=200)
     except Exception as e:
         import traceback
@@ -171,7 +172,7 @@ def process_sheet_request():
         error_details = traceback.format_exc()
         
         # Cloud Run 로그에 상세 에러를 출력합니다.
-        print(f"Error processing config_key '{config_key}':\n{error_details}")
+        print(f"[{config_key}] 오류 발생: {error_details}", flush=True)
 
         # HTTP 응답 본문에 상세 에러를 포함하여 디버깅을 돕습니다.
         return Response(f"Internal Server Error:\n{error_details}", status=500)
