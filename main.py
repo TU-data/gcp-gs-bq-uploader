@@ -106,14 +106,18 @@ def load_sheet_to_bigquery(config_key: str):
                 if col_type == 'STRING':
                     df[col_name] = df[col_name].astype(str).fillna('')
                 elif col_type in ['INTEGER', 'INT64']:
-                    # 숫자로 변환할 수 없는 값은 0으로 대체
+                    # 쉼표 제거 및 숫자로 변환할 수 없는 값은 0으로 대체
+                    df[col_name] = df[col_name].astype(str).str.replace(',', '', regex=False)
                     df[col_name] = pd.to_numeric(df[col_name], errors='coerce').fillna(0).astype(int)
                 elif col_type in ['FLOAT', 'FLOAT64']:
+                    df[col_name] = df[col_name].astype(str).str.replace(',', '', regex=False)
                     df[col_name] = pd.to_numeric(df[col_name], errors='coerce').fillna(0.0).astype(float)
                 elif col_type == 'BOOLEAN':
                     # 'true', 't', '1' (대소문자 무관) 외에는 모두 False로 처리
                     df[col_name] = df[col_name].str.lower().isin(['true', 't', '1']).astype(bool)
-                # DATE, DATETIME, TIMESTAMP 등 다른 타입 추가 가능
+                elif col_type == 'DATE':
+                    df[col_name] = pd.to_datetime(df[col_name], errors='coerce').dt.date
+                # DATETIME, TIMESTAMP 등 다른 타입 추가 가능
             except Exception as e:
                 print(f"[{config_key}] 경고: 컬럼 '{col_name}'({col_type}) 변환 중 오류 발생. 데이터를 건너뜁니다. 오류: {e}", flush=True)
                 # 오류 발생 시 해당 컬럼을 null 값으로 채울 수도 있음
