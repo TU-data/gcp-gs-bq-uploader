@@ -43,52 +43,73 @@ Flask 기반의 웹 애플리케이션으로 구현되었으며, Docker를 사�
 4.  `schemas/{schema_file}.csv` 파일을 읽어 컬럼명 매핑 정보와 데이터 타입을 가져옵니다.
 5.  Pandas를 사용하여 조회한 데이터의 컬럼명을 변경하고, 정의된 데이터 타입으로 변환합니다.
 6.  Google BigQuery 클라이언트를 사용하여 변환된 Pandas DataFrame을 목표 테이블에 직접 적재합니다. 이때 `WRITE_TRUNCATE` 옵션을 사용하여 기존 데이터를 모두 삭제하고 새로 입력합니다.
-7.  모든 과정은 상세한 한글 로그와 함께 Cloud Run 로그에 기록되어 진행 상황을 쉽게 파악할 수 있습니다.
+7.  모든 과정은 상세한 한글 로그와 함께 `Cloud Run 로그`에 기록되어 진행 상황을 쉽게 파악할 수 있습니다.
 
-## 5. 설치 및 배포
+## 5. 설치 및 배포 (Google Cloud Platform UI)
 
 ### 사전 준비 사항
 
--   Google Cloud Platform 프로젝트
--   활성화된 API:
+-   **Google Cloud Platform 프로젝트**: 프로젝트가 생성되어 있고, 결제가 활성화되어 있어야 합니다.
+-   **소스 코드 저장소**: GitHub 또는 Cloud Source Repositories에 프로젝트 코드가 푸시되어 있어야 합니다.
+-   **활성화된 API**:
     -   Google Cloud Build API
     -   Google Cloud Run API
     -   Google BigQuery API
     -   Google Sheets API
--   Cloud Run 서비스를 실행하고 BigQuery 및 Google Sheets에 접근할 권한을 가진 서비스 계정(Service Account)
+-   **서비스 계정 (Service Account)**: Cloud Run 서비스를 실행하고 BigQuery 및 Google Sheets에 접근할 수 있는 권한(예: `BigQuery 데이터 편집자`, `Google Sheets API에 대한 접근 권한`)을 가진 서비스 계정이 필요합니다.
 
-### 설정 방법
+### 파이프라인 설정
 
-1.  **파이프라인 설정 추가**:
-    -   `configs` 디렉토리에 `my_pipeline.json` 과 같은 새로운 설정 파일을 추가합니다.
-    -   `schemas` 디렉토리에 `my_schema.csv` 와 같이 위 설정에 맞는 스키마 파일을 추가합니다.
-2.  **Cloud Build 설정**:
-    -   `cloudbuild.yaml` 파일에서 `PROJECT_ID`, Cloud Run 서비스 이름, 서비스 계정 등을 환경에 맞게 수정합니다.
+-   `configs/main_configs.json` 파일에 파이프라인 설정을 추가하거나 수정합니다. 각 설정은 Google Sheet ID, BigQuery 테이블 ID 등의 정보를 포함해야 합니다.
+-   `schemas` 디렉토리에 각 파이프라인에 맞는 스키마 CSV 파일을 추가합니다.
 
 ### 배포
 
--   로컬에 `gcloud` CLI가 설치된 경우, 아래 명령어를 사용하여 수동으로 빌드 및 배포를 트리거할 수 있습니다.
+이 프로젝트는 CI/CD 파이프라인이 설정되어 있어, Git 저장소의 특정 브랜치(예: `main`)에 코드를 푸시하면 자동으로 빌드 및 배포가 진행됩니다.
 
+1.  **소스 코드 변경**: 로컬에서 코드를 수정한 후 Git에 커밋합니다.
+2.  **Git Push**: 원격 저장소의 해당 브랜치로 푸시합니다.
     ```bash
-    gcloud builds submit --config cloudbuild.yaml .
+    git push origin main
     ```
+3.  **자동 배포**: 푸시된 코드는 Cloud Build 트리거에 의해 감지되어, `cloudbuild.yaml` 설정에 따라 자동으로 애플리케이션을 빌드하고 Cloud Run에 새로운 버전으로 배포합니다.
 
--   또는, Cloud Source Repositories와 같은 Git 저장소와 Cloud Build 트리거를 연결하여 코드 푸시 시 자동으로 배포되도록 설정할 수 있습니다.
+## 6. 사용 방법 (Cloud Scheduler로 자동 실행 설정)
 
-## 6. 사용 방법
+배포된 Cloud Run 서비스를 주기적으로 실행하여 데이터 파이프라인을 자동화하려면 Google Cloud Scheduler를 사용합니다.
 
-Cloud Run에 서비스가 성공적으로 배포되면, 아래와 같이 HTTP POST 요청을 보내 파이프라인을 실행할 수 있습니다.
+1.  **Cloud Scheduler 페이지로 이동**:
+    -   Google Cloud Console에서 'Cloud Scheduler'로 이동합니다.
 
-`{SERVICE_URL}`은 Cloud Run 배포 후 생성된 서비스의 URL입니다.
+2.  **작업 만들기 (Create Job)**:
+    -   '작업 만들기'를 클릭하여 새 스케줄러 작업을 생성합니다.
+    -   기존 작업을 복사 하는 것이 편리합니다. 
 
-```bash
-curl -X POST {SERVICE_URL}/process \
--H "Content-Type: application/json" \
--d '{ \
-  "config_key": "01" \
-}'
-```
+3.  **작업 정보 입력**:
+    -   **이름**: 작업의 고유한 이름을 입력합니다 (예: `daily-data-pipeline`).
+    -   **리전**: Cloud Run 서비스가 배포된 리전과 동일한 리전을 선택합니다.
+    -   **빈도**: 원하는 실행 주기를 [cron](https://cloud.google.com/scheduler/docs/configuring/cron-job-schedules) 형식으로 입력합니다 (예: 매일 오전 9시에 실행하려면 `0 9 * * *`).
+    -   **시간대**: 기준 시간대를 선택합니다 (예: `Asia/Seoul`).
 
--   `config_key`: `configs/main_configs.json` 파일에 정의된 설정의 키를 지정합니다. (예: "01")
+4.  **실행 대상 구성**:
+    -   **대상 유형**: `HTTP`를 선택합니다.
+    -   **URL**: 배포된 Cloud Run 서비스의 URL에 `/process` 엔드포인트를 추가하여 입력합니다. (예: `https://<your-cloud-run-service-url>/process`)
+    -   **HTTP 메서드**: `POST`를 선택합니다.
+    -   **본문**: 실행할 파이프라인의 `config_key`를 JSON 형식으로 입력합니다.
+        ```json
+        {
+          "config_key": "daily-data-pipeline"
+        }
+        ```
+        (여기서 `"01"`은 `configs/main_configs.json`에 정의된 키입니다.)
 
--   이 요청은 Cloud Scheduler에 등록하여 원하는 시간마다 주기적으로 실행하도록 설정할 수 있습니다.
+5.  **인증 설정**:
+    -   **HTTP 헤더** 섹션 아래에서 **인증 헤더 추가**를 클릭합니다.
+    -   **인증 유형**: `OIDC 토큰`을 선택합니다.
+    -   **서비스 계정**: Cloud Scheduler가 Cloud Run 서비스를 호출할 때 사용할 서비스 계정을 선택합니다. 이 서비스 계정에는 `Cloud Run 호출자(roles/run.invoker)` 역할이 부여되어 있어야 합니다.
+
+6.  **만들기**:
+    -   '만들기'를 클릭하여 스케줄러 작업을 저장하고 활성화합니다.
+
+이제 Cloud Scheduler가 설정된 빈도에 따라 자동으로 Cloud Run 서비스를 호출하여 데이터 파이프라인을 실행합니다.
+
