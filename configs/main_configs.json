@@ -12,5 +12,12 @@
     "column_range": "A:C",
     "bigquery_table_id": "tugether-data-warehouse-01.06_mkt.01_keyword_search_raw",
     "schema_file": "01_keyword_search_raw.csv"
+  },
+  "02_patient_refusal_raw": {
+    "google_sheet_id": "1GlC5N8wUk4bvTOMQRbHjG02Q3syLJjYH0KcXDylrIoU",
+    "sheet_name": "2024년1월~2025년 4월 미동의",
+    "column_range": "A:L",
+    "bigquery_table_id": "tugether-data-warehouse-01.03_consulting.02_patient_refusal_raw",
+    "schema_file": "02_patient_refusal_raw.csv"
   }
 }
