@@ -5,5 +5,12 @@
     "column_range": "A:C",
     "bigquery_table_id": "tugether-data-warehouse-01.99_test.call_criteria",
     "schema_file": "call_criteria.csv"
+  },
+  "01_keyword_search_raw": {
+    "google_sheet_id": "1lOaFgknPgs-uV8daWzL8H_zwF4THDxK_196S4deMtl4",
+    "sheet_name": "키워드_트렌드",
+    "column_range": "A:C",
+    "bigquery_table_id": "tugether-data-warehouse-01.06_mkt.01_keyword_search_raw",
+    "schema_file": "01_keyword_search_raw.csv"
   }
 }
