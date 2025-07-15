@@ -134,9 +134,11 @@ def load_sheet_to_bigquery(config_key: str):
         for index, row in schema_df.iterrows()
     ]
     
+    # 데이터프레임을 BigQuery 테이블에 로드
     job_config = bigquery.LoadJobConfig(
         schema=bq_schema,
-        write_disposition="WRITE_TRUNCATE"  # 기존 테이블 데이터 삭제 후 새로 쓰기
+        write_disposition="WRITE_TRUNCATE",  # 테이블이 있으면 덮어쓰기
+        create_disposition="CREATE_IF_NEEDED" # 테이블이 없으면 스키마에 따라 생성
     )
 
     # BQ 클라이언트를 사용하여 데이터프레임에서 직접 로드
