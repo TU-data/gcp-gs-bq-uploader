@@ -56,32 +56,32 @@ def load_sheet_to_bigquery(config_key: str):
     print(f"[{config_key}] Google Sheet에서 {len(data) - 1}개의 행 데이터 읽기 완료.", flush=True)
 
     # 3. Pandas 데이터프레임 생성 및 스키마 기반 컬럼명 할당
-    # Google Sheet의 첫 행(헤더)은 무시하고, 스키마 파일의 순서를 기준으로 컬럼명을 할당합니다.
-    sheet_data = data[1:]
-    df = pd.DataFrame(sheet_data)
+    # Google Sheet의 헤더와 스키마 파일의 컬럼명 순서 및 내용 일치 여부 검증
+    sheet_header = [h.strip() for h in data[0]]
+    schema_header = schema_df['기존 컬럼명'].tolist()
 
-    print(f"[{config_key}] 데이터프레임 생성 완료. 총 {len(df)} 행.", flush=True)
-
-    # 컬럼 개수 검증
-    sheet_column_count = len(df.columns)
-    schema_column_count = len(schema_df)
-
-    print(f"[{config_key}] 컬럼 개수 비교: Google Sheet = {sheet_column_count}개, 스키마 파일 = {schema_column_count}개", flush=True)
-
-    if sheet_column_count != schema_column_count:
+    if sheet_header != schema_header:
         error_message = (
-            f"컬럼 개수 불일치 오류!\n"
-            f"> Google Sheet의 컬럼은 {sheet_column_count}개이지만, "
-            f"스키마 파일(schemas/{config['schema_file']})에는 {schema_column_count}개의 컬럼이 정의되어 있습니다."
+            f"컬럼명/순서 불일치 오류!\n"
+            f"> Google Sheet 헤더: {sheet_header}\n"
+            f"> 스키마 파일 헤더: {schema_header}"
         )
         print(f"[{config_key}] {error_message}", flush=True)
         raise ValueError(error_message)
 
-    print(f"[{config_key}] 컬럼 개수 검증 완료: Google Sheet와 스키마 파일의 컬럼 개수가 일치합니다.", flush=True)
+    print(f"[{config_key}] 컬럼명 및 순서 검증 완료: Google Sheet와 스키마 파일의 헤더가 일치합니다.", flush=True)
 
-    # 스키마 파일의 영문 컬럼명을 데이터프레임의 컬럼명으로 직접 할당
+    # 데이터프레임 생성 후, 스키마의 영문 컬럼명을 직접 할당
+    df = pd.DataFrame(data[1:])
+    
+    # 데이터프레임의 컬럼 수가 스키마와 다른 경우, 데이터 행의 길이가 다른 것이므로 오류 발생
+    if len(df.columns) != len(schema_header):
+        raise ValueError(f"데이터의 컬럼 수가 헤더의 컬럼 수({len(schema_header)})와 일치하지 않습니다. 시트의 데이터 행을 확인하세요.")
+
     df.columns = schema_df['영어 컬럼명'].tolist()
     
+    print(f"[{config_key}] 데이터프레임 생성 및 영문 컬럼명 할당 완료. 총 {len(df)} 행.", flush=True)
+
     # 최종 컬럼은 스키마에 정의된 영문 컬럼 전체 (순서 고정)
     final_columns = schema_df['영어 컬럼명'].tolist()
     df = df[final_columns]
