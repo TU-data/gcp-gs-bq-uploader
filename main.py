@@ -55,42 +55,35 @@ def load_sheet_to_bigquery(config_key: str):
 
     print(f"[{config_key}] Google Sheet에서 {len(data) - 1}개의 행 데이터 읽기 완료.", flush=True)
 
-    # 3. Pandas 데이터프레임 생성 및 컬럼명 변경 
-    # 첫 행은 헤더, 나머지는 데이터
-    # Google Sheet의 컬럼명 앞뒤 공백 제거
-    header = [h.strip() for h in data[0]]
-    df = pd.DataFrame(data[1:], columns=header)
+    # 3. Pandas 데이터프레임 생성 및 스키마 기반 컬럼명 할당
+    # Google Sheet의 첫 행(헤더)은 무시하고, 스키마 파일의 순서를 기준으로 컬럼명을 할당합니다.
+    sheet_data = data[1:]
+    df = pd.DataFrame(sheet_data)
 
     print(f"[{config_key}] 데이터프레임 생성 완료. 총 {len(df)} 행.", flush=True)
 
-    # -- 디버깅 로그 추가 시작 --
-    print(f"[{config_key}] Google Sheet에서 읽어온 컬럼: {list(df.columns)}", flush=True)
-    print(f"[{config_key}] 스키마 파일에 정의된 컬럼: {list(schema_df['기존 컬럼명'])}", flush=True)
+    # 컬럼 개수 검증
+    sheet_column_count = len(df.columns)
+    schema_column_count = len(schema_df)
 
-    sheet_columns = set(df.columns)
-    schema_columns = set(schema_df['기존 컬럼명'])
-    
-    missing_in_sheet = schema_columns - sheet_columns
-    missing_in_schema = sheet_columns - schema_columns
-    
-    if missing_in_sheet or missing_in_schema:
-        error_message = "컬럼명 불일치 오류!\n"
-        if missing_in_sheet:
-            error_message += f"> Google Sheet에 다음 컬럼이 없습니다: {list(missing_in_sheet)}\n"
-        if missing_in_schema:
-            error_message += f"> 스키마 파일(schemas/{config['schema_file']})에 다음 컬럼이 없습니다: {list(missing_in_schema)}\n"
+    print(f"[{config_key}] 컬럼 개수 비교: Google Sheet = {sheet_column_count}개, 스키마 파일 = {schema_column_count}개", flush=True)
+
+    if sheet_column_count != schema_column_count:
+        error_message = (
+            f"컬럼 개수 불일치 오류!\n"
+            f"> Google Sheet의 컬럼은 {sheet_column_count}개이지만, "
+            f"스키마 파일(schemas/{config['schema_file']})에는 {schema_column_count}개의 컬럼이 정의되어 있습니다."
+        )
         print(f"[{config_key}] {error_message}", flush=True)
         raise ValueError(error_message)
+
+    print(f"[{config_key}] 컬럼 개수 검증 완료: Google Sheet와 스키마 파일의 컬럼 개수가 일치합니다.", flush=True)
+
+    # 스키마 파일의 영문 컬럼명을 데이터프레임의 컬럼명으로 직접 할당
+    df.columns = schema_df['영어 컬럼명'].tolist()
     
-    print(f"[{config_key}] 컬럼명 검증 완료: Google Sheet와 스키마 파일의 컬럼명이 일치합니다.", flush=True)
-    # -- 디버깅 로그 추가 끝 --
-    
-    # 스키마 파일 기반으로 컬럼명 매핑 (한글 -> 영문)
-    column_mapping = dict(zip(schema_df['기존 컬럼명'], schema_df['영어 컬럼명']))
-    df.rename(columns=column_mapping, inplace=True)
-    
-    # 정의된 영문 컬럼만 선택하여 순서 고정
-    final_columns = [col for col in column_mapping.values() if col in df.columns]
+    # 최종 컬럼은 스키마에 정의된 영문 컬럼 전체 (순서 고정)
+    final_columns = schema_df['영어 컬럼명'].tolist()
     df = df[final_columns]
     
     print(f"[{config_key}] 컬럼명 매핑 및 순서 고정 완료. 최종 컬럼: {df.columns.tolist()}", flush=True)
