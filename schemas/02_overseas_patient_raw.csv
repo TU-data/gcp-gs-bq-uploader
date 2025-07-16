@@ -1,5 +1,5 @@
 기존 컬럼명,데이터 타입,영어 컬럼명
-차트,STRING,chart_id
+차트번호,STRING,chart_id
 고객명,STRING,patient_name
 국적1,STRING,nationality
 실 거주지,STRING,actual_residence
