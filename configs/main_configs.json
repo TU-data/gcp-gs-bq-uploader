@@ -89,6 +89,34 @@
     "column_range": "L:P",
     "bigquery_table_id": "tugether-data-warehouse-01.02_sales.07_category_criteria",
     "schema_file": "07_category_criteria.csv"
+  },
+  "05_monthly_sales_criteria": {
+    "google_sheet_id": "1lOaFgknPgs-uV8daWzL8H_zwF4THDxK_196S4deMtl4",
+    "sheet_name": "data_기준_2",
+    "column_range": "E:G",
+    "bigquery_table_id": "tugether-data-warehouse-01.02_sales.05_monthly_sales_criteria",
+    "schema_file": "05_monthly_sales_criteria.csv"
+  },
+  "04_business_day_criteria": {
+    "google_sheet_id": "1lOaFgknPgs-uV8daWzL8H_zwF4THDxK_196S4deMtl4",
+    "sheet_name": "data_기준_2",
+    "column_range": "A:C",
+    "bigquery_table_id": "tugether-data-warehouse-01.02_sales.04_business_day_criteria",
+    "schema_file": "04_business_day_criteria.csv"
+  },
+  "03_linyi_referral_criteria": {
+    "google_sheet_id": "1lOaFgknPgs-uV8daWzL8H_zwF4THDxK_196S4deMtl4",
+    "sheet_name": "data_기준",
+    "column_range": "R:S",
+    "bigquery_table_id": "tugether-data-warehouse-01.02_sales.03_linyi_referral_criteria",
+    "schema_file": "03_linyi_referral_criteria.csv"
+  },
+  "02_overseas_patient_raw": {
+    "google_sheet_id": "1lOaFgknPgs-uV8daWzL8H_zwF4THDxK_196S4deMtl4",
+    "sheet_name": "data_기준",
+    "column_range": "A:G",
+    "bigquery_table_id": "tugether-data-warehouse-01.02_sales.02_overseas_patient_raw",
+    "schema_file": "02_overseas_patient_raw.csv"
   }
 
 }
