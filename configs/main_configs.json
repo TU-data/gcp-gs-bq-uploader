@@ -68,6 +68,13 @@
     "column_range": "A:S",
     "bigquery_table_id": "tugether-data-warehouse-01.04_global_event.01_japan_consult_raw",
     "schema_file": "01_japan_consult_raw.csv"
+  },
+  "01_katalk_plus_raw": {
+    "google_sheet_id": "1l1NOjXZu2IoIp21yaaepwm8D54VDLCnUiGjoXNa559w",
+    "sheet_name": "카톡플친",
+    "column_range": "B3:D",
+    "bigquery_table_id": "tugether-data-warehouse-01.05_cs.01_katalk_plus_raw",
+    "schema_file": "01_katalk_plus_raw.csv"
   }
 
 }
