@@ -1,11 +1,4 @@
 {
-  "02": {
-    "google_sheet_id": "1l1NOjXZu2IoIp21yaaepwm8D54VDLCnUiGjoXNa559w",
-    "sheet_name": "인콜기준",
-    "column_range": "A:C",
-    "bigquery_table_id": "tugether-data-warehouse-01.99_test.call_criteria",
-    "schema_file": "call_criteria.csv"
-  },
   "01_keyword_search_raw": {
     "google_sheet_id": "1lOaFgknPgs-uV8daWzL8H_zwF4THDxK_196S4deMtl4",
     "sheet_name": "키워드_트렌드",
@@ -19,5 +12,55 @@
     "column_range": "A:L",
     "bigquery_table_id": "tugether-data-warehouse-01.03_consulting.02_patient_refusal_raw",
     "schema_file": "02_patient_refusal_raw.csv"
+  },
+  "03_hwanghyeok_consult_raw": {
+    "google_sheet_id": "1xzEwlmS4yZdomP5YY7fZuF6TkcQBFz3g7JIRrlh4nuQ",
+    "sheet_name": "상담내역작성",
+    "column_range": "B3:AS",
+    "bigquery_table_id": "tugether-data-warehouse-01.03_consulting.03_hwanghyeok_consult_raw",
+    "schema_file": "consultants_raw.csv"
+  },
+  "04_jwamihui_consult_raw": {
+    "google_sheet_id": "1dFJ7nlceacyPdEVeVyqOs-wXiwffOELQHDQc2s6diwo",
+    "sheet_name": "상담내역작성",
+    "column_range": "B3:AS",
+    "bigquery_table_id": "tugether-data-warehouse-01.03_consulting.04_jwamihui_consult_raw",
+    "schema_file": "consultants_raw.csv"
+  },
+  "05_kimmiri_consult_raw": {
+    "google_sheet_id": "13UyP1Yt731ZVGOG3uA47c5XUmoVyixzEOAgVLbRyFpM",
+    "sheet_name": "상담내역작성",
+    "column_range": "B3:AS",
+    "bigquery_table_id": "tugether-data-warehouse-01.03_consulting.05_kimmiri_consult_raw",
+    "schema_file": "consultants_raw.csv"
+  },
+  "06_kimeunji_consult_raw": {
+    "google_sheet_id": "1yTsoMOi95RhY_0cjKlOT-rQRz3A9VPKEV5bHzi_xEeQ",
+    "sheet_name": "상담내역작성",
+    "column_range": "B3:AS",
+    "bigquery_table_id": "tugether-data-warehouse-01.03_consulting.06_kimeunji_consult_raw",
+    "schema_file": "consultants_raw.csv"
+  },
+  "07_bongbaegyeong_consult_raw": {
+    "google_sheet_id": "1pT1JCiJOiC2YxqncJeVoRi610KBvr73QYpUV7ljZ-Vo",
+    "sheet_name": "상담내역작성",
+    "column_range": "B3:AS",
+    "bigquery_table_id": "tugether-data-warehouse-01.03_consulting.07_bongbaegyeong_consult_raw",
+    "schema_file": "consultants_raw.csv"
+  },
+  "08_leemingyeong_consult_raw": {
+    "google_sheet_id": "15UFh4Y_-9yvDOTD9iqCVCZ0SXQKqSsHt1N14ECSNk7s",
+    "sheet_name": "상담내역작성",
+    "column_range": "B3:AS",
+    "bigquery_table_id": "tugether-data-warehouse-01.03_consulting.08_leemingyeong_consult_raw",
+    "schema_file": "consultants_raw.csv"
+  },
+  "09_koeunju_consult_raw": {
+    "google_sheet_id": "14VhWQWAAGHbrr7hU8bUP-2HcI5flgQ-33aDg5PbpAw4",
+    "sheet_name": "상담내역작성",
+    "column_range": "B3:AS",
+    "bigquery_table_id": "tugether-data-warehouse-01.03_consulting.09_koeunju_consult_raw",
+    "schema_file": "consultants_raw.csv"
   }
+
 }
