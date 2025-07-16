@@ -71,14 +71,30 @@ def load_sheet_to_bigquery(config_key: str):
 
     print(f"[{config_key}] 컬럼명 및 순서 검증 완료: Google Sheet와 스키마 파일의 헤더가 일치합니다.", flush=True)
 
-    # 데이터프레임 생성 후, 스키마의 영문 컬럼명을 직접 할당
-    df = pd.DataFrame(data[1:])
-    
-    # 데이터프레임의 컬럼 수가 스키마와 다른 경우, 데이터 행의 길이가 다른 것이므로 오류 발생
-    if len(df.columns) != len(schema_header):
-        raise ValueError(f"데이터의 컬럼 수가 헤더의 컬럼 수({len(schema_header)})와 일치하지 않습니다. 시트의 데이터 행을 확인하세요.")
+    # 데이터 정규화: 모든 데이터 행의 길이를 헤더/스키마의 컬럼 수에 맞게 조정
+    expected_col_count = len(schema_header)
+    normalized_data = []
+    # data[0]은 헤더, data[1:]은 실제 데이터. column_range가 'B3:AS'이므로 실제 시트 행은 i + 4
+    for i, row in enumerate(data[1:]):
+        row_len = len(row)
+        if row_len != expected_col_count:
+            print(f"[{config_key}] 경고: 시트의 {i + 4}행 길이가 헤더({expected_col_count}개)와 다릅니다({row_len}개). 길이를 조정합니다.", flush=True)
+            if row_len < expected_col_count:
+                # 행이 짧으면 빈 문자열로 채움
+                normalized_data.append(row + [''] * (expected_col_count - row_len))
+            else: # row_len > expected_col_count
+                # 행이 길면 자름
+                normalized_data.append(row[:expected_col_count])
+        else:
+            normalized_data.append(row)
 
-    df.columns = schema_df['영어 컬럼명'].tolist()
+    # 데이터가 없는 경우 처리
+    if not normalized_data:
+        print(f"[{config_key}] 처리할 데이터가 없습니다. 작업을 종료합니다.", flush=True)
+        return
+
+    # 정규화된 데이터로 데이터프레임 생성 후, 스키마의 영문 컬럼명을 직접 할당
+    df = pd.DataFrame(normalized_data, columns=schema_df['영어 컬럼명'].tolist())
     
     print(f"[{config_key}] 데이터프레임 생성 및 영문 컬럼명 할당 완료. 총 {len(df)} 행.", flush=True)
 
