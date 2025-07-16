@@ -78,10 +78,17 @@
   },
   "06_call_criteria": {
     "google_sheet_id": "1l1NOjXZu2IoIp21yaaepwm8D54VDLCnUiGjoXNa559w",
-    "sheet_name": "카톡플친",
+    "sheet_name": "인콜기준",
     "column_range": "A:C",
     "bigquery_table_id": "tugether-data-warehouse-01.02_sales.06_call_criteria",
     "schema_file": "06_call_criteria.csv"
+  },
+  "07_category_criteria": {
+    "google_sheet_id": "1lOaFgknPgs-uV8daWzL8H_zwF4THDxK_196S4deMtl4",
+    "sheet_name": "data_기준",
+    "column_range": "L:P",
+    "bigquery_table_id": "tugether-data-warehouse-01.02_sales.07_category_criteria",
+    "schema_file": "07_category_criteria.csv"
   }
 
 }
