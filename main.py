@@ -5,6 +5,7 @@ import gspread
 from flask import Flask, request, Response
 from google.auth import default
 from google.cloud import bigquery
+from slack_notifier import send_slack_notification
 
 app = Flask(__name__)
 
@@ -179,10 +180,17 @@ def process_sheet_request():
         return Response("Bad Request: 요청 본문에 'config_key'가 필요합니다.", status=400)
         
     config_key = payload['config_key']
-    
+    table_name = ""
     try:
+        with open('configs/main_configs.json', 'r', encoding='utf-8') as f:
+            all_configs = json.load(f)
+        config = all_configs.get(config_key)
+        if config:
+            table_name = config.get('bigquery_table_id', 'Unknown Table')
+
         print(f"[{config_key}] 작업 시작...", flush=True)
-        load_sheet_to_bigquery(config_key)
+        num_rows = load_sheet_to_bigquery(config_key)
+        send_slack_notification(table_name, True, num_rows)
         print(f"[{config_key}] 작업 성공적으로 완료.", flush=True)
         return Response(f"Success: Job for config_key '{config_key}' completed.", status=200)
     except Exception as e:
@@ -192,6 +200,7 @@ def process_sheet_request():
         
         # Cloud Run 로그에 상세 에러를 출력합니다.
         print(f"[{config_key}] 오류 발생: {error_details}", flush=True)
+        send_slack_notification(table_name, False, 0, error_message=str(e))
 
         # HTTP 응답 본문에 상세 에러를 포함하여 디버깅을 돕습니다.
         return Response(f"Internal Server Error:\n{error_details}", status=500)

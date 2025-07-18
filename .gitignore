@@ -1,0 +1,5 @@
+local_config.py
+__pycache__/
+.venv/
+tugether-data-warehouse-01-1203a1f407db.json
+run_local.py
