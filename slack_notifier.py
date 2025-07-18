@@ -1,7 +1,7 @@
 import requests
 import os
 
-def send_slack_notification(config_key, full_table_id, success, error_message=None):
+def send_slack_notification(config_key, full_table_id, success, num_rows=None, error_message=None):
     """
     Sends a notification to a Slack channel using a webhook.
 
@@ -17,9 +17,11 @@ def send_slack_notification(config_key, full_table_id, success, error_message=No
         return
 
     if success:
-        message = f"✅ [{config_key}] 성공: BigQuery 테이블 {full_table_id}에 로드했습니다."
+        message = f"✅ [{config_key}] 성공:\n- BQ테이블 명 : {full_table_id}"
+        if num_rows is not None:
+            message += f"\n- 추가된 행개수 : {num_rows}개"
     else:
-        message = f"❌ [{config_key}] 실패: BigQuery 테이블 {full_table_id} 로드 중 오류 발생.\n오류: {error_message}"
+        message = f"❌ [{config_key}] 실패: BigQuery 테이블 {full_table_id} 로드 중 오류 발생.\n오류 내용 : {error_message}"
 
     payload = {"text": message}
     try:

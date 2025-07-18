@@ -200,7 +200,7 @@ def process_sheet_request():
         
         # Cloud Run 로그에 상세 에러를 출력합니다.
         print(f"[{config_key}] 오류 발생: {error_details}", flush=True)
-        send_slack_notification(table_name, False, 0, error_message=str(e))
+        send_slack_notification(config_key, table_name, False, error_message=str(e))
 
         # HTTP 응답 본문에 상세 에러를 포함하여 디버깅을 돕습니다.
         return Response(f"Internal Server Error:\n{error_details}", status=500)
