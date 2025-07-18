@@ -169,6 +169,7 @@ def load_sheet_to_bigquery(config_key: str):
     job.result()  # 작업이 완료될 때까지 대기
 
     print(f"[{config_key}] 성공: {job.output_rows}개의 행을 BigQuery 테이블 {table_id}에 로드했습니다.", flush=True)
+    return job.output_rows
 
 
 @app.route('/process', methods=['POST'])
@@ -189,8 +190,8 @@ def process_sheet_request():
             table_name = config.get('bigquery_table_id', 'Unknown Table')
 
         print(f"[{config_key}] 작업 시작...", flush=True)
-        load_sheet_to_bigquery(config_key)
-        send_slack_notification(config_key, table_name, True, num_rows=job.output_rows)
+        num_rows_loaded = load_sheet_to_bigquery(config_key)
+        send_slack_notification(config_key, table_name, True, num_rows=num_rows_loaded)
         print(f"[{config_key}] 작업 성공적으로 완료.", flush=True)
         return Response(f"Success: Job for config_key '{config_key}' completed.", status=200)
     except Exception as e:
