@@ -189,8 +189,8 @@ def process_sheet_request():
             table_name = config.get('bigquery_table_id', 'Unknown Table')
 
         print(f"[{config_key}] 작업 시작...", flush=True)
-        num_rows = load_sheet_to_bigquery(config_key)
-        send_slack_notification(table_name, True, num_rows)
+        load_sheet_to_bigquery(config_key)
+        send_slack_notification(config_key, table_name, True)
         print(f"[{config_key}] 작업 성공적으로 완료.", flush=True)
         return Response(f"Success: Job for config_key '{config_key}' completed.", status=200)
     except Exception as e:
