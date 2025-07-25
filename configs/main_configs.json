@@ -70,7 +70,7 @@
     "schema_file": "consultants_raw.csv"
   },
   "11_kimbogyeong_consult_raw": {
-    "google_sheet_id": "1Pl1XTyt6ssB8cefk9OkYSOjkC6FqefCVuZ6n2xGnSG8",
+    "google_sheet_id": "1D8sG8k-Znwf7mlWLj-UIXqF3SetUaExHdEubcyIEtiY",
     "sheet_name": "상담내역작성",
     "column_range": "B3:AS",
     "bigquery_table_id": "tugether-data-warehouse-01.03_consulting.11_kimbogyeong_consult_raw",
