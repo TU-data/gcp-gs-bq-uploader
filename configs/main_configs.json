@@ -62,6 +62,20 @@
     "bigquery_table_id": "tugether-data-warehouse-01.03_consulting.09_koeunju_consult_raw",
     "schema_file": "consultants_raw.csv"
   },
+  "10_woochaeri_consult_raw": {
+    "google_sheet_id": "1Pl1XTyt6ssB8cefk9OkYSOjkC6FqefCVuZ6n2xGnSG8",
+    "sheet_name": "상담내역작성",
+    "column_range": "B3:AS",
+    "bigquery_table_id": "tugether-data-warehouse-01.03_consulting.10_woochaeri_consult_raw",
+    "schema_file": "consultants_raw.csv"
+  },
+  "11_kimbogyeong_consult_raw": {
+    "google_sheet_id": "1Pl1XTyt6ssB8cefk9OkYSOjkC6FqefCVuZ6n2xGnSG8",
+    "sheet_name": "상담내역작성",
+    "column_range": "B3:AS",
+    "bigquery_table_id": "tugether-data-warehouse-01.03_consulting.11_kimbogyeong_consult_raw",
+    "schema_file": "consultants_raw.csv"
+  },
   "01_japan_consult_raw": {
     "google_sheet_id": "19FrLZeqpsiD8xV0n-6vCjPOmbyIFrZfNG05E6GfK-js",
     "sheet_name": "실매출 발생 확인 시트",
