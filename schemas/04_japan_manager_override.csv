@@ -1,0 +1,7 @@
+기존 컬럼명,데이터 타입,영어 컬럼명
+담당실장,STRING,coordinator_name
+이름,STRING,name_kor
+영문명,STRING,name_eng
+차트번호,STRING,chart_id
+이관대상,STRING,override_manager
+상담회차수,INTEGER,consult_round
