@@ -145,6 +145,12 @@
     "column_range": "A:G",
     "bigquery_table_id": "tugether-data-warehouse-01.02_sales.02_overseas_patient_raw",
     "schema_file": "02_overseas_patient_raw.csv"
+  },
+  "04_japan_manager_override": {
+    "google_sheet_id": "19FrLZeqpsiD8xV0n-6vCjPOmbyIFrZfNG05E6GfK-js",
+    "sheet_name": "담당실장 이관",
+    "column_range": "A:F",
+    "bigquery_table_id": "tugether-data-warehouse-01.04_global_event.04_japan_manager_override",
+    "schema_file": "04_japan_manager_override.csv"
   }
-
 }
