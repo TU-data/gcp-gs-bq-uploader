@@ -14,7 +14,9 @@ no,INTEGER,no_id
 직업,STRING,occupation
 인입경로_1,STRING,consult_channel_1
 인입경로_2,STRING,consult_channel_2
+담당실장,STRING,sales_manager
 상담실장,STRING,consult_manager
 견적금액,INT64,estimate_amount
 상담회방문횟수,INTEGER,consult_count
+
 누적내원횟수,INTEGER,visit_count
