@@ -4,6 +4,8 @@
 해외환자,BOOL,is_foreign_patient
 차트번호,STRING,chart_id
 고객명,STRING,patient_name
+실거주지,STRING,residence
+국적,STRING,nationality
 구환,BOOL,is_existing_patient
 등급1,STRING,grade_primary
 등급2,STRING,grade_secondary
@@ -42,4 +44,5 @@ MARTH,BOOL,is_marth
 작성월,INTEGER,review_written_month
 소개자,STRING,referrer_name
 차트번호,INTEGER,referrer_chart_id
+
 비고,STRING,referrer_note
