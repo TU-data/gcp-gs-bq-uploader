@@ -131,6 +131,12 @@
     "column_range": "A:G",
     "bigquery_table_id": "tugether-data-warehouse-01.02_sales.02_overseas_patient_raw",
     "schema_file": "02_overseas_patient_raw.csv"
+  },
+  "02_outcall_raw": {
+    "google_sheet_id": "1-rU6vXsuh4Z343R0J0_AO7nre4UECqYgiqte3FF0b64",
+    "sheet_name": "raw",
+    "column_range": "I:T",
+    "bigquery_table_id": "tugether-data-warehouse-01.06_mkt.02_outcall_raw",
+    "schema_file": "02_outcall_raw.csv"
   }
-
 }
