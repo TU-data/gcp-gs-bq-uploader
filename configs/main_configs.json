@@ -153,6 +153,8 @@
     "bigquery_table_id": "tugether-data-warehouse-01.06_mkt.02_outcall_raw",
     "schema_file": "02_outcall_raw.csv"
   },
+
+
   "04_japan_manager_override": {
     "google_sheet_id": "19FrLZeqpsiD8xV0n-6vCjPOmbyIFrZfNG05E6GfK-js",
     "sheet_name": "담당실장 이관",
