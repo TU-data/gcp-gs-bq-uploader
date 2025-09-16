@@ -10,4 +10,4 @@ CS접수일,DATE,cs_received_date
 진료항목,STRING,treatment_item
 이행여부,STRING,is_completed
 고객chart_id,STRING,chart_id
-매출금액,INT,sales_amount
+매출금액,INTEGER,sales_amount
