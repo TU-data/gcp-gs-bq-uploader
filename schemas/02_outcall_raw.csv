@@ -1,13 +1,13 @@
 기존 컬럼명,데이터 타입,영어 컬럼명
-DB 유입 일시,DATETIME,db_inflow_datetime
-고객 이름,STRING,customer_name
-고객 전화번호,STRING,customer_phone
-고객 유입 경로,STRING,inflow_channel
-CS 접수일,DATE,cs_received_date
+DB유입일시,DATETIME,db_inflow_datetime
+고객이름,STRING,customer_name
+고객전화번호,STRING,customer_phone
+고객유입경로,STRING,inflow_channel
+CS접수일,DATE,cs_received_date
 국내_해외,STRING,domestic_overseas
 상태,STRING,status
-최초 예약 일시,DATETIME,first_reservation_datetime
-진료 항목,STRING,treatment_item
+최초예약 일시,DATETIME,first_reservation_datetime
+진료항목,STRING,treatment_item
 이행여부,STRING,is_completed
-고객 chart_id,STRING,chart_id
+고객chart_id,STRING,chart_id
 매출금액,INT,sales_amount
