@@ -159,6 +159,5 @@
     "column_range": "I:T",
     "bigquery_table_id": "tugether-data-warehouse-01.06_mkt.02_outcall_raw",
     "schema_file": "02_outcall_raw.csv"
-  },
+  }
 }
-
