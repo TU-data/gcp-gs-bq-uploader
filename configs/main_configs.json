@@ -153,7 +153,7 @@
     "bigquery_table_id": "tugether-data-warehouse-01.04_global_event.04_japan_manager_override",
     "schema_file": "04_japan_manager_override.csv"
   },
-   "02_outcall_raw": {
+  "02_outcall_raw": {
     "google_sheet_id": "1-rU6vXsuh4Z343R0J0_AO7nre4UECqYgiqte3FF0b64",
     "sheet_name": "raw",
     "column_range": "I:T",
