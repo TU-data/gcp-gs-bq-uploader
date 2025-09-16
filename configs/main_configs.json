@@ -16,72 +16,86 @@
   "03_hwanghyeok_consult_raw": {
     "google_sheet_id": "1xzEwlmS4yZdomP5YY7fZuF6TkcQBFz3g7JIRrlh4nuQ",
     "sheet_name": "상담내역작성",
-    "column_range": "B3:AS",
+    "column_range": "B3:AU",
     "bigquery_table_id": "tugether-data-warehouse-01.03_consulting.03_hwanghyeok_consult_raw",
     "schema_file": "consultants_raw.csv"
   },
   "04_jwamihui_consult_raw": {
     "google_sheet_id": "1dFJ7nlceacyPdEVeVyqOs-wXiwffOELQHDQc2s6diwo",
     "sheet_name": "상담내역작성",
-    "column_range": "B3:AS",
+    "column_range": "B3:AU",
     "bigquery_table_id": "tugether-data-warehouse-01.03_consulting.04_jwamihui_consult_raw",
     "schema_file": "consultants_raw.csv"
   },
   "05_kimmiri_consult_raw": {
     "google_sheet_id": "13UyP1Yt731ZVGOG3uA47c5XUmoVyixzEOAgVLbRyFpM",
     "sheet_name": "상담내역작성",
-    "column_range": "B3:AS",
+    "column_range": "B3:AU",
     "bigquery_table_id": "tugether-data-warehouse-01.03_consulting.05_kimmiri_consult_raw",
     "schema_file": "consultants_raw.csv"
   },
   "06_kimeunji_consult_raw": {
     "google_sheet_id": "1yTsoMOi95RhY_0cjKlOT-rQRz3A9VPKEV5bHzi_xEeQ",
     "sheet_name": "상담내역작성",
-    "column_range": "B3:AS",
+    "column_range": "B3:AU",
     "bigquery_table_id": "tugether-data-warehouse-01.03_consulting.06_kimeunji_consult_raw",
     "schema_file": "consultants_raw.csv"
   },
   "07_bongbaegyeong_consult_raw": {
     "google_sheet_id": "1pT1JCiJOiC2YxqncJeVoRi610KBvr73QYpUV7ljZ-Vo",
     "sheet_name": "상담내역작성",
-    "column_range": "B3:AS",
+    "column_range": "B3:AU",
     "bigquery_table_id": "tugether-data-warehouse-01.03_consulting.07_bongbaegyeong_consult_raw",
     "schema_file": "consultants_raw.csv"
   },
   "08_leemingyeong_consult_raw": {
     "google_sheet_id": "15UFh4Y_-9yvDOTD9iqCVCZ0SXQKqSsHt1N14ECSNk7s",
     "sheet_name": "상담내역작성",
-    "column_range": "B3:AS",
+    "column_range": "B3:AU",
     "bigquery_table_id": "tugether-data-warehouse-01.03_consulting.08_leemingyeong_consult_raw",
     "schema_file": "consultants_raw.csv"
   },
   "09_koeunju_consult_raw": {
     "google_sheet_id": "14VhWQWAAGHbrr7hU8bUP-2HcI5flgQ-33aDg5PbpAw4",
     "sheet_name": "상담내역작성",
-    "column_range": "B3:AS",
+    "column_range": "B3:AU",
     "bigquery_table_id": "tugether-data-warehouse-01.03_consulting.09_koeunju_consult_raw",
     "schema_file": "consultants_raw.csv"
   },
   "10_woochaeri_consult_raw": {
     "google_sheet_id": "1Pl1XTyt6ssB8cefk9OkYSOjkC6FqefCVuZ6n2xGnSG8",
     "sheet_name": "상담내역작성",
-    "column_range": "B3:AS",
+    "column_range": "B3:AU",
     "bigquery_table_id": "tugether-data-warehouse-01.03_consulting.10_woochaeri_consult_raw",
     "schema_file": "consultants_raw.csv"
   },
   "11_kimbogyeong_consult_raw": {
     "google_sheet_id": "1D8sG8k-Znwf7mlWLj-UIXqF3SetUaExHdEubcyIEtiY",
     "sheet_name": "상담내역작성",
-    "column_range": "B3:AS",
+    "column_range": "B3:AU",
     "bigquery_table_id": "tugether-data-warehouse-01.03_consulting.11_kimbogyeong_consult_raw",
     "schema_file": "consultants_raw.csv"
   },
   "01_japan_consult_raw": {
     "google_sheet_id": "19FrLZeqpsiD8xV0n-6vCjPOmbyIFrZfNG05E6GfK-js",
     "sheet_name": "실매출 발생 확인 시트",
-    "column_range": "A:S",
+    "column_range": "A:T",
     "bigquery_table_id": "tugether-data-warehouse-01.04_global_event.01_japan_consult_raw",
     "schema_file": "01_japan_consult_raw.csv"
+  },
+  "02_japan_consult_meeting_raw": {
+    "google_sheet_id": "19FrLZeqpsiD8xV0n-6vCjPOmbyIFrZfNG05E6GfK-js",
+    "sheet_name": "일본상담회_가공RAW",
+    "column_range": "A:AF",
+    "bigquery_table_id": "tugether-data-warehouse-01.04_global_event.02_japan_consult_meeting_raw",
+    "schema_file": "02_japan_consult_meeting_raw.csv"
+  },
+  "03_japan_consult_meeting_cost": {
+    "google_sheet_id": "19FrLZeqpsiD8xV0n-6vCjPOmbyIFrZfNG05E6GfK-js",
+    "sheet_name": "일본상담회 비용 정리",
+    "column_range": "A:E",
+    "bigquery_table_id": "tugether-data-warehouse-01.04_global_event.03_japan_consult_meeting_cost",
+    "schema_file": "03_japan_consult_meeting_cost.csv"
   },
   "01_katalk_plus_raw": {
     "google_sheet_id": "1l1NOjXZu2IoIp21yaaepwm8D54VDLCnUiGjoXNa559w",
@@ -132,6 +146,7 @@
     "bigquery_table_id": "tugether-data-warehouse-01.02_sales.02_overseas_patient_raw",
     "schema_file": "02_overseas_patient_raw.csv"
   },
+<<<<<<< HEAD
   "02_outcall_raw": {
     "google_sheet_id": "1-rU6vXsuh4Z343R0J0_AO7nre4UECqYgiqte3FF0b64",
     "sheet_name": "raw",
@@ -140,3 +155,13 @@
     "schema_file": "02_outcall_raw.csv"
   }
 }
+=======
+  "04_japan_manager_override": {
+    "google_sheet_id": "19FrLZeqpsiD8xV0n-6vCjPOmbyIFrZfNG05E6GfK-js",
+    "sheet_name": "담당실장 이관",
+    "column_range": "A:F",
+    "bigquery_table_id": "tugether-data-warehouse-01.04_global_event.04_japan_manager_override",
+    "schema_file": "04_japan_manager_override.csv"
+  }
+}
+>>>>>>> 9845917f828155bab1d4f394d032c6f8024622c6
