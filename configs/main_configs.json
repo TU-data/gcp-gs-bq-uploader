@@ -160,4 +160,11 @@
     "bigquery_table_id": "tugether-data-warehouse-01.06_mkt.02_outcall_raw",
     "schema_file": "02_outcall_raw.csv"
   }
+   "12_nami_consult_raw": {
+    "google_sheet_id": "1FwW_4w8zAeQURMDnasTMYJ3dB_uCXQmQ40ZsE3_O0X0",
+    "sheet_name": "상담내역작성",
+    "column_range": "B3:AU",
+    "bigquery_table_id": "tugether-data-warehouse-01.03_consulting.12_nami_consult_raw",
+    "schema_file": "consultants_raw.csv"
+  }
 }
