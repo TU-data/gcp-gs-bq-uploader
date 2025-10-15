@@ -166,5 +166,12 @@
     "column_range": "B3:AU",
     "bigquery_table_id": "tugether-data-warehouse-01.03_consulting.12_nami_consult_raw",
     "schema_file": "consultants_raw.csv"
+  },
+  "13_shiho_consult_raw": {
+    "google_sheet_id": "1iftanjKrFdpzy4tClLAEcJEODboNa6P0NJ5zYOJxiAo",
+    "sheet_name": "상담내역작성",
+    "column_range": "B3:AU",
+    "bigquery_table_id": "tugether-data-warehouse-01.03_consulting.13_shiho_consult_raw",
+    "schema_file": "consultants_raw.csv"
   }
 }
