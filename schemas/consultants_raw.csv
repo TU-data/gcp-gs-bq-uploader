@@ -11,7 +11,7 @@
 등급2,STRING,grade_secondary
 인입경로,STRING,visit_channel
 상담불가,BOOL,consultation_blocked
-불가사유,STRING,block_reason
+미동의사유,STRING,block_reason
 진료과,STRING,treatment_category_1
 진료세부,STRING,treatment_name_1
 기공소,STRING,lab_name_1
@@ -46,3 +46,4 @@ MARTH,BOOL,is_marth
 차트번호,INTEGER,referrer_chart_id
 
 비고,STRING,referrer_note
+
