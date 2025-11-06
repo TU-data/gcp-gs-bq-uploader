@@ -8,7 +8,7 @@
   },
   "02_patient_refusal_raw": {
     "google_sheet_id": "1GlC5N8wUk4bvTOMQRbHjG02Q3syLJjYH0KcXDylrIoU",
-    "sheet_name": "2024년1월~2025년 11월 미동의",
+    "sheet_name": "2024년1월~2025년 11월미동의",
     "column_range": "A:L",
     "bigquery_table_id": "tugether-data-warehouse-01.03_consulting.02_patient_refusal_raw",
     "schema_file": "02_patient_refusal_raw.csv"
