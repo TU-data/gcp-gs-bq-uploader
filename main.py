@@ -6,6 +6,7 @@ from flask import Flask, request, Response
 from google.auth import default
 from google.cloud import bigquery
 from slack_notifier import send_slack_notification
+from jandi_notifier import send_jandi_notification
 
 app = Flask(__name__)
 
@@ -192,6 +193,7 @@ def process_sheet_request():
         print(f"[{config_key}] 작업 시작...", flush=True)
         num_rows_loaded = load_sheet_to_bigquery(config_key)
         send_slack_notification(config_key, table_name, True, num_rows=num_rows_loaded)
+        send_jandi_notification(config_key, table_name, True, num_rows=num_rows_loaded)
         print(f"[{config_key}] 작업 성공적으로 완료.", flush=True)
         return Response(f"Success: Job for config_key '{config_key}' completed.", status=200)
     except Exception as e:
@@ -202,6 +204,7 @@ def process_sheet_request():
         # Cloud Run 로그에 상세 에러를 출력합니다.
         print(f"[{config_key}] 오류 발생: {error_details}", flush=True)
         send_slack_notification(config_key, table_name, False, error_message=str(e))
+        send_jandi_notification(config_key, table_name, False, error_message=str(e))
 
         # HTTP 응답 본문에 상세 에러를 포함하여 디버깅을 돕습니다.
         return Response(f"Internal Server Error:\n{error_details}", status=500)
