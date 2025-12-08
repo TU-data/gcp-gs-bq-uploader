@@ -179,6 +179,6 @@
     "sheet_name": "잔금현황",
     "column_range": "A:L",
     "bigquery_table_id": "tugether-data-warehouse-01.01_sales.08_contract_payment_raw",
-    "schema_file": "08_contract-payment_raw.csv"
+    "schema_file": "08_contract_payment_raw.csv"
   }
 }
