@@ -1,0 +1,13 @@
+기존 컬럼명,데이터 타입,영어 컬럼명
+환자정보,STRING,patient_name_chartid
+작성일,DATE,created_date
+진행상태,STRING,contract_status
+수납상태,STRING,payment_status
+치료계획,STRING,treatment_plan
+계약금액,INT64,contract_amount
+현재수납액,INT64,current_payment_amount
+최종내원,DATE,last_visit_date
+다음 예약,DATE,next_reservation_date
+차트번호,STRING,chart_id,
+환자이름,STRING,patient_name
+잔금,INT64,remaining_amount
