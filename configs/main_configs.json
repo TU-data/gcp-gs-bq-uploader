@@ -176,7 +176,7 @@
   },
   "08_contract_payment_raw": {
     "google_sheet_id": "1YQDA0r3rjG3aFiuudro61JpQ-8L0CrjmxKcIAQ1J7qU",
-    "sheet_name": "잔금치료비용계획 수납내역현황",
+    "sheet_name": "치료비용계획 수납내역",
     "column_range": "A:L",
     "bigquery_table_id": "tugether-data-warehouse-01.02_sales.08_contract_payment_raw",
     "schema_file": "08_contract_payment_raw.csv"
