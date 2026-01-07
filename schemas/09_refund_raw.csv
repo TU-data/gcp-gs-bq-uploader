@@ -1,19 +1,19 @@
-기존 컬럼명, 데이터 타입, 영어 컬럼명
-고객환불요청날짜, DATE, refund_req_date
-차트번호, STRING, chart_id
-고객이름, STRING, patient_name
-담당실장, STRING, coordinator_name
-고객 연락처, STRING, phone_number
-진료항목, STRING, treatment_type
-고객결제날짜, DATE, reception_date
-결제정보 (카드사/ 카드번호), STRING, payment_info
-결제 승인번호, STRING, approval_code
-결제금액, INT64, total_payment
-환불금액, INT64, refund_amount
-이사님컨펌, BOOL, is_confirmed_by_director
-환불실행날짜, DATE, refund_date
-환불완료, BOOL, is_refunded
-환불방법, STRING, refund_type
-고객환불정보, STRING, refund_info
-환불사유, STRING, refund_reason
-비고, STRING, remarks
+기존 컬럼명,데이터 타입,영어 컬럼명
+고객환불요청날짜,DATE,refund_req_date
+차트번호,STRING,chart_id
+고객이름,STRING,patient_name
+담당실장,STRING,coordinator_name
+고객 연락처,STRING,phone_number
+진료항목,STRING,treatment_type
+고객결제날짜,DATE,reception_date
+결제정보 (카드사/ 카드번호),STRING,payment_info
+결제 승인번호,STRING,approval_code
+결제금액,INT64,total_payment
+환불금액,INT64,refund_amount
+이사님컨펌,BOOL,is_confirmed_by_director
+환불실행날짜,DATE,refund_date
+환불완료,BOOL,is_refunded
+환불방법,STRING,refund_type
+고객환불정보,STRING,refund_info
+환불사유,STRING,refund_reason
+비고,STRING,remarks
