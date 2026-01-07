@@ -16,5 +16,4 @@
 환불방법, STRING, refund_type
 고객환불정보, STRING, refund_info
 환불사유, STRING, refund_reason
-
 비고, STRING, remarks
