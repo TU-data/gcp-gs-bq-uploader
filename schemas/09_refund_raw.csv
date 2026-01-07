@@ -4,7 +4,7 @@
 고객이름, STRING, patient_name
 담당실장, STRING, coordinator_name
 고객 연락처, STRING, phone_number
-진료항목, STRING, treatment_type,
+진료항목, STRING, treatment_type
 고객결제날짜, DATE, reception_date
 결제정보 (카드사/ 카드번호), STRING, payment_info
 결제 승인번호, STRING, approval_code
@@ -16,4 +16,5 @@
 환불방법, STRING, refund_type
 고객환불정보, STRING, refund_info
 환불사유, STRING, refund_reason
+
 비고, STRING, remarks
