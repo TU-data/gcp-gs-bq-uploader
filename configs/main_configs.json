@@ -180,5 +180,11 @@
     "column_range": "A:L",
     "bigquery_table_id": "tugether-data-warehouse-01.02_sales.08_contract_payment_raw",
     "schema_file": "08_contract_payment_raw.csv"
-  }
+  },
+   "09_refund_raw": {
+    "google_sheet_id": "1GlC5N8wUk4bvTOMQRbHjG02Q3syLJjYH0KcXDylrIoU",
+    "sheet_name": "환불관리",
+    "column_range": "A:R",
+    "bigquery_table_id": "tugether-data-warehouse-01.02_sales.09_refund_raw",
+    "schema_file": "09_refund_raw.csv"
 }
