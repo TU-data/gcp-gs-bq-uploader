@@ -187,4 +187,5 @@
     "column_range": "A:R",
     "bigquery_table_id": "tugether-data-warehouse-01.02_sales.09_refund_raw",
     "schema_file": "09_refund_raw.csv"
+  }
 }
