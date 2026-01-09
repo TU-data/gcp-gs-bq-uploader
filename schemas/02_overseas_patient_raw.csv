@@ -3,6 +3,6 @@
 고객명,STRING,patient_name
 국적1,STRING,nationality
 실 거주지,STRING,actual_residence
-구분,STRING,residency_type
+거주구분,STRING,residency_type
 국적2 (수식),STRING,inferred_nationality
-여권번호,STRING,passport_umber
+여권번호,STRING,passport_number
