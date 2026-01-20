@@ -2,6 +2,7 @@
 고객환불요청날짜,DATE,refund_req_date
 차트번호,STRING,chart_id
 고객이름,STRING,patient_name
+티둥이 소개 여부,STRING,is_tidoongi_referral
 담당실장,STRING,coordinator_name
 고객 연락처,STRING,phone_number
 진료항목,STRING,treatment_type
