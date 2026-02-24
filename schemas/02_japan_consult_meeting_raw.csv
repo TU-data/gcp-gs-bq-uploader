@@ -4,7 +4,8 @@
 인입1,STRING,consult_channel_1
 인입2,STRING,consult_channel_2
 인입3,STRING,consult_channel_3
-직업,STRING,job
+직업1,STRING,job_raw
+직업2,STRING,job
 이름,STRING,name
 차트번호,STRING,chart_id
 예산(만원),INT64,budget_10k_krw
@@ -22,7 +23,6 @@
 후상담,TIME,time_after_consult
 귀가,TIME,time_home
 예약,STRING,is_reserved
-예약금방식,STRING,deposit_type
 덴트웹예약,STRING,dentweb_reservation
 한국 여행계획,STRING,travel_plan
 생년월일,DATE,date_birth
@@ -31,3 +31,4 @@
 상담회차수,INTEGER,consult_round
 상담회지역,STRING,consult_location
 최초내원일,DATE,first_visit_date
+
