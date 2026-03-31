@@ -8,7 +8,9 @@
 태국(cpv),INTEGER,thailand_cpv
 중국(cpv),INTEGER,china_cpv
 대만(cpv),INTEGER,taiwan_cpv
-병원의사검색광고(강언),INTEGER,hospital_search_ad_gangnamunni
+병원,STRING,hospital
+의사,STRING,doctor
+검색광고(강언),INTEGER,search_ad_gangnamunni
 디스플레이광고(강언),INTEGER,display_ad_gangnamunni
 부스팅(바비톡),INTEGER,boosting_babitalk
 모션형배너(바비톡),INTEGER,motion_banner_babitalk
