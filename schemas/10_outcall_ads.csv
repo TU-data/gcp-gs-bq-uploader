@@ -1,5 +1,5 @@
 기존 컬럼명,데이터 타입,영어 컬럼명
-년월,INTEGER,year_month
+년월,STRING,year_month
 일자,DATE,date
 매체,STRING,media_channel
 국내(cpv),INTEGER,domestic_cpv
