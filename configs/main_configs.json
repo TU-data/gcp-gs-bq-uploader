@@ -187,5 +187,12 @@
     "column_range": "A:S",
     "bigquery_table_id": "tugether-data-warehouse-01.02_sales.09_refund_raw",
     "schema_file": "09_refund_raw.csv"
+  },
+   "10_outcall_ads": {
+    "google_sheet_id": "1-rU6vXsuh4Z343R0J0_AO7nre4UECqYgiqte3FF0b64",
+    "sheet_name": "마케팅 비용_RAW",
+    "column_range": "A:T",
+    "bigquery_table_id": "tugether-data-warehouse-01.02_sales.22_outcall_ads",
+    "schema_file": "10_outcall_ads.csv"
   }
 }

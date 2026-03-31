@@ -1,0 +1,19 @@
+기존 컬럼명,데이터 타입,영어 컬럼명
+년월,INTEGER,year_month
+일자,DATE,date
+매체,STRING,media_channel
+국내(cpv),INTEGER,domestic_cpv
+일본 월정액(강언),INTEGER,japan_monthly_fee_gangnamunni
+일본(cpv),INTEGER,japan_cpv
+태국(cpv),INTEGER,thailand_cpv
+중국(cpv),INTEGER,china_cpv
+대만(cpv),INTEGER,taiwan_cpv
+병원의사검색광고(강언),INTEGER,hospital_search_ad_gangnamunni
+디스플레이광고(강언),INTEGER,display_ad_gangnamunni
+부스팅(바비톡),INTEGER,boosting_babitalk
+모션형배너(바비톡),INTEGER,motion_banner_babitalk
+푸시/팝업(바비톡),INTEGER,push_popup_babitalk
+올인원배너(바비톡),INTEGER,allinone_banner_babitalk
+광고비 합계(net),INTEGER,ad_cost_total_net
+광고비(vat),INTEGER,ad_cost_vat
+비고,STRING,notes
