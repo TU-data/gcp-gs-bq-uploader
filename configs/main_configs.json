@@ -99,7 +99,7 @@
   },
   "01_katalk_plus_raw": {
     "google_sheet_id": "1uOckVE8Mtc2Rb8z3A6s5plU_fKDyRUDtdPeTb4-OfRY",
-    "sheet_name": "카톡플친",
+    "sheet_name": "시트1",
     "column_range": "B11:D",
     "bigquery_table_id": "tugether-data-warehouse-01.05_cs.01_katalk_plus_raw",
     "schema_file": "01_katalk_plus_raw.csv"
