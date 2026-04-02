@@ -194,5 +194,12 @@
     "column_range": "A:T",
     "bigquery_table_id": "tugether-data-warehouse-01.07_ads.06_outcall_ads",
     "schema_file": "10_outcall_ads.csv"
+  },
+    "02_cs_daily_report_raw": {
+    "google_sheet_id": "1L6jX4YCtO5FTzjIIrywaqBPKxnWfiyIxctItBA7QfPk",
+    "sheet_name": "CS실 일일보고_raw",
+    "column_range": "A:M",
+    "bigquery_table_id": "tugether-data-warehouse-01.05_cs.02_cs_daily_report_raw",
+    "schema_file": "02_cs_daily_report_raw.csv"
   }
 }
