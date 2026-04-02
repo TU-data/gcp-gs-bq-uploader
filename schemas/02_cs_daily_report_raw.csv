@@ -1,0 +1,14 @@
+기존 컬럼명,데이터 타입,영어 컬럼명
+날짜,DATE,date
+아웃DB,INTEGER,db_outcall
+자광DB,INTEGER,db_ads
+아웃예약,INTEGER,reservation_outcall
+자광예약,INTEGER,reservation_ads
+인콜DB,INTEGER,db_incall
+네이버DB,INTEGER,db_naver
+홈피DB,INTEGER,db_homepage
+플친문의,INTEGER,db_kakaotalk
+인콜예약,INTEGER,reservation_incall
+네이버예약,INTEGER,reservation_naver
+홈피예약,INTEGER,reservation_homepage
+플친예약,INTEGER,reservation_kakaotalk
