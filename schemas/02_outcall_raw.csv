@@ -2,12 +2,12 @@
 DB유입일시,DATETIME,db_inflow_datetime
 이름,STRING,customer_name
 전화번호,STRING,customer_phone
-유입경로,STRING,inflow_channel
+매체,STRING,media_channel
 국가,STRING,country
-국내해외,STRING,domestic_overseas
+국내해외,STRING,region_type
 CS접수일,DATE,cs_received_date
 CS예약일시,DATETIME,cs_reservation_datetime
 DB상태,STRING,db_status
-이행여부,STRING,is_completed
+이행여부,STRING,is_visited
 차트번호,STRING,chart_id
-DB발생매출,INTEGER,db_sales_amount
+DB발생매출,INTEGER,db_attributed_sales
