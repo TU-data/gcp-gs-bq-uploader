@@ -190,7 +190,7 @@
   },
    "10_outcall_ads": {
     "google_sheet_id": "1-rU6vXsuh4Z343R0J0_AO7nre4UECqYgiqte3FF0b64",
-    "sheet_name": "마케팅 비용_RAW",
+    "sheet_name": "광고비_raw",
     "column_range": "A:T",
     "bigquery_table_id": "tugether-data-warehouse-01.07_ads.06_outcall_ads",
     "schema_file": "10_outcall_ads.csv"
