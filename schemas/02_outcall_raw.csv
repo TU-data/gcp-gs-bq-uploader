@@ -8,6 +8,4 @@ DB유입일시,DATETIME,db_inflow_datetime
 CS접수일,DATE,cs_received_date
 CS예약일시,DATETIME,cs_reservation_datetime
 DB상태,STRING,db_status
-이행여부,STRING,is_visited
 차트번호,STRING,chart_id
-DB발생매출,INTEGER,db_attributed_sales
