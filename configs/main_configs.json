@@ -201,5 +201,11 @@
     "column_range": "A:M",
     "bigquery_table_id": "tugether-data-warehouse-01.05_cs.02_cs_daily_report_raw",
     "schema_file": "02_cs_daily_report_raw.csv"
-  }
+  },
+  "14_kwonkyoungnan_consult_raw": {
+    "google_sheet_id": "1mSqIZj-abeAO6M21XIxATAIZesU_YyZX-iSmF3N_xsw",
+    "sheet_name": "상담내역작성",
+    "column_range": "B3:AU",
+    "bigquery_table_id": "tugether-data-warehouse-01.03_consulting.14_kwonkyoungnan_consult_raw",
+    "schema_file": "consultants_raw.csv"
 }
