@@ -208,4 +208,5 @@
     "column_range": "B3:AU",
     "bigquery_table_id": "tugether-data-warehouse-01.03_consulting.14_kwonkyoungnan_consult_raw",
     "schema_file": "consultants_raw.csv"
+  }
 }
