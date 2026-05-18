@@ -114,7 +114,7 @@
   "07_category_criteria": {
     "google_sheet_id": "1L6jX4YCtO5FTzjIIrywaqBPKxnWfiyIxctItBA7QfPk",
     "sheet_name": "data_기준",
-    "column_range": "L:P",
+    "column_range": "L:O",
     "bigquery_table_id": "tugether-data-warehouse-01.02_sales.07_category_criteria",
     "schema_file": "07_category_criteria.csv"
   },
