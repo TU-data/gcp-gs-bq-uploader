@@ -2,7 +2,7 @@
 uuid,STRING,uuid
 진행상태,STRING,status
 문의채널,STRING,inquiry_channel
-문의일,DATETIME,inquiry_datetime
+문의일,DATE,inquiry_date
 문의채널고객이름,STRING,channel_customer_name
 고객실제이름(영어대문자),STRING,customer_name_en
 유입경로자유기재,STRING,inflow_source_manual
@@ -12,8 +12,8 @@ GPT 기준 상세경로,STRING,gpt_inflow_path_detail
 상담회 회차,STRING,consult_event_round
 폼링크(고객 전달용),STRING,form_link
 링크 전달 유무,BOOLEAN,is_link_sent
-상담회 참여일시,DATETIME,consult_event_datetime
-내원예약일시,DATETIME,visit_reserved_datetime
+상담회 참여일시,DATE,consult_event_date
+내원예약일시,DATE,visit_reserved_date
 차트번호,STRING,chart_id
 상담실장,STRING,consultant_name
 통역사,STRING,interpreter_name
