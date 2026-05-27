@@ -208,5 +208,12 @@
     "column_range": "B3:AU",
     "bigquery_table_id": "tugether-data-warehouse-01.03_consulting.14_kwonkyoungnan_consult_raw",
     "schema_file": "consultants_raw.csv"
-  }
+  },
+  "japan_customers": {
+    "google_sheet_id": "1culrtD_h1S9WkMPWXAJ_1Hvw3Lwm3apa3asCtwcjTY8",
+    "sheet_name": "일본 고객 여정 관리",
+    "column_range": "A1:U",
+    "bigquery_table_id": "tugether-data-warehouse-01.10_lead.japan_customers",
+    "schema_file": "japan_customers.csv"
+}
 }
