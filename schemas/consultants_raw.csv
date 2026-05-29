@@ -44,6 +44,9 @@ MARTH,BOOL,is_marth
 작성월,INTEGER,review_written_month
 소개자,STRING,referrer_name
 차트번호,INTEGER,referrer_chart_id
-
 비고,STRING,referrer_note
+마케팅비용,INTEGER,deposit_mkt
+납부일,DATE,deposit_mkt_date
+납부방식,STRING,deposit_mkt_method
+반환일,DATE,deposit_mkt_return_date
 
