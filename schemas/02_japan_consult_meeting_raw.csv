@@ -24,7 +24,7 @@
 귀가,TIME,time_home
 예약,STRING,is_reserved
 덴트웹예약,STRING,dentweb_reservation
-한국 여행계획,STRING,travel_plan
+비고,STRING,memo
 생년월일,DATE,date_birth
 성별,STRING,gender
 거주지,STRING,residence
