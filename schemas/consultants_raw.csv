@@ -1,11 +1,12 @@
 기존 컬럼명,데이터 타입,영어 컬럼명
 담당실장,STRING,coordinator_name
 상담일,DATE,consultation_date
-해외환자,BOOL,is_foreign_patient
+해외수가여부,BOOL,is_foreign_patient
 차트번호,STRING,chart_id
 고객명,STRING,patient_name
-실거주지,STRING,residence
 국적,STRING,nationality
+거주지역,STRING,residence
+인종,STRING,race
 구환,BOOL,is_existing_patient
 등급1,STRING,grade_primary
 등급2,STRING,grade_secondary
@@ -49,4 +50,3 @@ MARTH,BOOL,is_marth
 납부일,DATE,deposit_mkt_date
 납부방식,STRING,deposit_mkt_method
 반환일,DATE,deposit_mkt_return_date
-
