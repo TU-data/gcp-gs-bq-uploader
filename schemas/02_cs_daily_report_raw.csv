@@ -17,7 +17,7 @@
 홈피DB,INTEGER,db_homepage
 플친문의,INTEGER,db_kakaotalk
 왓츠앱DB,INTEGER,db_whatsapp
-인스타DB,INTEGER,db_instagram	
+인스타DB,INTEGER,db_instagram
 대만라인DB,INTEGER,db_line_tw
 공식위챗DB,INTEGER,db_wechat_official
 업무위챗DB,INTEGER,db_wechat_biz
@@ -26,7 +26,7 @@
 홈피예약,INTEGER,reservation_homepage
 플친예약,INTEGER,reservation_kakaotalk
 왓츠앱예약,INTEGER,reservation_whatsapp
-인스타예약,INTEGER,reservation_instagram	
+인스타예약,INTEGER,reservation_instagram
 대만라인예약,INTEGER,reservation_line_tw
 공식위챗예약,INTEGER,reservation_wechat_official
 업무위챗예약,INTEGER,reservation_wechat_biz
