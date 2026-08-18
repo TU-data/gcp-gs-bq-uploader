@@ -30,6 +30,7 @@
 대만라인예약,INTEGER,reservation_line_tw
 공식위챗예약,INTEGER,reservation_wechat_official
 업무위챗예약,INTEGER,reservation_wechat_biz
+인콜내원,INTEGER,visit_incall
 네이버내원,INTEGER,visit_naver
 홈피내원,INTEGER,visit_homepage
 플친내원,INTEGER,visit_kakaotalk
