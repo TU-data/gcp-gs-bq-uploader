@@ -2,3 +2,4 @@
 구분,DATE,record_date
 누적 친구수,INT64,total_friends
 당일친구수,INT64,daily_new_friends
+월목표누적친구수,INT64,monthly_target_total_friends
