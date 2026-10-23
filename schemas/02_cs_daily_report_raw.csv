@@ -38,3 +38,4 @@
 인스타내원,INTEGER,visit_instagram
 대만라인내원,INTEGER,visit_line_tw
 위챗 내원,INTEGER,visit_wechat
+기타내원,INTEGER,visit_etc
