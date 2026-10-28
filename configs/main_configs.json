@@ -195,6 +195,13 @@
     "bigquery_table_id": "tugether-data-warehouse-01.07_ads.06_outcall_ads",
     "schema_file": "10_outcall_ads.csv"
   },
+   "11_meta_ads": {
+    "google_sheet_id": "1-rU6vXsuh4Z343R0J0_AO7nre4UECqYgiqte3FF0b64",
+    "sheet_name": "META광고비_raw",
+    "column_range": "A:G",
+    "bigquery_table_id": "tugether-data-warehouse-01.07_ads.07_meta_ads",
+    "schema_file": "11_meta_ads.csv"
+  },
     "02_cs_daily_report_raw": {
     "google_sheet_id": "1L6jX4YCtO5FTzjIIrywaqBPKxnWfiyIxctItBA7QfPk",
     "sheet_name": "CS실 일일보고_raw",
