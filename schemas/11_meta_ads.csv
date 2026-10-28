@@ -2,7 +2,7 @@
 일자,DATE,date
 계정 이름,STRING,account_name
 캠페인,STRING,campaign_name
-노출,STRING,impression_cnt
-링크 클릭,STRING,click_cnt
+노출,INTEGER,impression_cnt
+링크 클릭,INTEGER,click_cnt
 지출 금액_net (KRW),INTEGER,ad_cost_net
 캠페인 유형,STRING,campaign_type
